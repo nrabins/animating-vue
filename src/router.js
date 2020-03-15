@@ -1,29 +1,46 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Modal from './views/Modal.vue'
-import List from './views/List.vue'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
+  base: process.env.BASE_URL,
   routes: [
     {
       path: '/',
-      name: 'Modal',
+      name: 'modal',
       component: Modal
     },
     {
-      path: '/List',
-      name: 'List',
-      component: List
+      path: '/list',
+      name: 'list',
+      component: () => import(/* webpackChunkName: "list" */ './views/List.vue')
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      path: '/drawer',
+      name: 'drawer',
+      component: () =>
+        import(/* webpackChunkName: "list" */ './views/Drawer.vue')
+    },
+    {
+      path: '/cards',
+      name: 'cards',
+      component: () =>
+        import(/* webpackChunkName: "cards" */ './views/Cards.vue')
+    },
+    {
+      path: '/simple',
+      name: 'simple',
+      component: () =>
+        import(/* webpackChunkName: "simple" */ './views/Simple.vue')
+    },
+    {
+      path: '/stagger',
+      name: 'stagger',
+      component: () =>
+        import(/* webpackChunkName: "stagger" */ './views/Stagger.vue')
     }
   ]
 })
